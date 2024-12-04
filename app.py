@@ -2,8 +2,11 @@ from flask import Flask, render_template, request, redirect, url_for
 import pandas as pd
 import os
 from datetime import datetime
-
+from flask_cors import CORS 
 app = Flask(__name__)
+CORS(app)  
+EXCEL_DIR = '/tmp'  # Temporary directory for cloud platforms like Render
+EXCEL_FILE = os.path.join(EXCEL_DIR, 'team_data.xlsx')
 
 # Function to get today's Excel file name
 def get_excel_file_name():
