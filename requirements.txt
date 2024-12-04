@@ -23,7 +23,7 @@ click==8.1.7
 colorama==0.4.3
 comm==0.2.2
 cryptography==2.8
-cupshelpers==1.0
+#cupshelpers==1.0
 dbus-python==1.2.16
 debugpy==1.8.7
 decorator==5.1.1
