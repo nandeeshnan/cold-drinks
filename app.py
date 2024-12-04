@@ -3,15 +3,16 @@ import pandas as pd
 import os
 from datetime import datetime
 from flask_cors import CORS 
+
 app = Flask(__name__)
 CORS(app)  
-EXCEL_DIR = '/tmp'  # Temporary directory for cloud platforms like Render
-EXCEL_FILE = os.path.join(EXCEL_DIR, 'team_data.xlsx')
 
-# Function to get today's Excel file name
+EXCEL_DIR = '/tmp'  # Temporary directory for cloud platforms like Render
+
+# Function to get today's Excel file name with full path in the /tmp directory
 def get_excel_file_name():
     today = datetime.now().strftime("%Y-%m-%d")  # e.g., 2024-12-04
-    return f"data_{today}.xlsx"
+    return os.path.join(EXCEL_DIR, f"data_{today}.xlsx")
 
 @app.route('/')
 def home():
@@ -28,7 +29,7 @@ def submit():
     # Prepare today's Excel file
     excel_file = get_excel_file_name()
 
-    # If file doesn't exist, create a new one with headers
+    # If the file doesn't exist, create a new one with headers
     if not os.path.exists(excel_file):
         df = pd.DataFrame(columns=["Date", "Name", "Outlet", "Comments"])
         df.to_excel(excel_file, index=False)
